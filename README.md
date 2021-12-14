@@ -2,6 +2,8 @@
 
 An GUI for rapid email template development following the structure of [Marketo boilerplate](https://github.com/andreitrinidad/marketo-boilerplate)
 
+A demo of File System API. Built with React and Tailwind
+
 ## Available Scripts
 
 In the project directory, you can run:

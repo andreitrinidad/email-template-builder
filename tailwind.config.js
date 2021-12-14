@@ -12,8 +12,11 @@ module.exports = {
   variants: {
     extend: {
       borderStyle: ['active'],
-      display: ["group-hover"]
-    }
+      display: ["group-hover"],
+      cursorNotAllowed:['disabled']
+    },
+    opacity: ({ after }) => after(['disabled']),
+    
   },
   plugins: [],
   important: true,

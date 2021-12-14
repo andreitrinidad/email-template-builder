@@ -7,4 +7,13 @@ module.exports = {
       ],
     },
   },
+  webpack: {
+    configure: (config) => {
+      config.module.rules.push({
+        test: /\.js$/,
+        use: { loader: require.resolve('@open-wc/webpack-import-meta-loader') }
+      });
+      return config
+    }
+  }
 }

@@ -30,11 +30,26 @@ const Reducer = (state, action) => {
                 ...state,
                 projectName: action.payload
             };
+        case 'SET_PROJECT_DIR':
+            return {
+                ...state,
+                projectDir: action.payload
+            };
 
         case 'SET_PREVIEW_FILES':
             return {
                 ...state,
                 previewFiles: action.payload
+            };
+        case 'SET_VARIANTS':
+            return {
+                ...state,
+                variants: action.payload
+            };
+        case 'SET_ACTIVE_VARIANT':
+            return {
+                ...state,
+                activeVariant: action.payload
             };
 
         case 'REMOVE_COMPONENT':
@@ -56,12 +71,20 @@ const Reducer = (state, action) => {
                 ...state,
                 globalIndexHTML: action.payload
             };
-        // case 'ADD_POST':
-        //     return {
-        //         ...state,
-        //         posts: state.posts.concat(action.payload)
-        //     };
-        
+        case 'SET_UNSAVED':
+            // The main wrapper of the preview files
+            return {
+                ...state,
+                isUnsavedChanges: action.payload
+            };
+        case 'CLOSE_VARIANT':
+            return {
+                ...state,
+                previewFiles: [],
+                activeVariant: '',
+                isUnsavedChanges: false,
+            };
+
         case 'SET_ERROR':
             return {
                 ...state,

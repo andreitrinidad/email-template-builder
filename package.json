@@ -1,64 +1,66 @@
 {
-  "name": "email-template-builder",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@craco/craco": "^6.4.2",
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-brands-svg-icons": "^5.15.4",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.16",
-    "@testing-library/jest-dom": "^5.15.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "array-move": "^4.0.0",
-    "axios": "^0.24.0",
-    "browser-fs-access": "^0.21.1",
-    "html-prettify": "^1.0.3",
-    "iframe-resizer-react": "^1.1.0",
-    "immutability-helper": "^3.1.1",
-    "json-beautify": "^1.1.1",
-    "prism-react-renderer": "^1.2.1",
-    "prismjs": "^1.25.0",
-    "react": "^17.0.2",
-    "react-dnd": "^14.0.4",
-    "react-dnd-html5-backend": "^14.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "react-simple-code-editor": "^0.11.0",
-    "react-simple-toasts": "^2.1.0",
-    "react-sortable-hoc": "^2.0.0",
-    "react-tabs": "^3.2.3",
-    "uuid": "^8.3.2",
-    "web-vitals": "^1.1.2"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.8.8",
-    "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
-  }
+	"name": "email-template-builder",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@craco/craco": "^6.4.2",
+		"@fortawesome/fontawesome-svg-core": "^1.2.36",
+		"@fortawesome/free-brands-svg-icons": "^5.15.4",
+		"@fortawesome/free-solid-svg-icons": "^5.15.4",
+		"@fortawesome/react-fontawesome": "^0.1.16",
+		"@testing-library/jest-dom": "^5.15.1",
+		"@testing-library/react": "^11.2.7",
+		"@testing-library/user-event": "^12.8.3",
+		"@zip.js/zip.js": "^2.3.19",
+		"array-move": "^4.0.0",
+		"axios": "^0.24.0",
+		"browser-fs-access": "^0.21.1",
+		"html-prettify": "^1.0.3",
+		"iframe-resizer-react": "^1.1.0",
+		"immutability-helper": "^3.1.1",
+		"json-beautify": "^1.1.1",
+		"prism-react-renderer": "^1.2.1",
+		"prismjs": "^1.25.0",
+		"react": "^17.0.2",
+		"react-dnd": "^14.0.4",
+		"react-dnd-html5-backend": "^14.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "4.0.3",
+		"react-simple-code-editor": "^0.11.0",
+		"react-simple-toasts": "^2.1.0",
+		"react-sortable-hoc": "^2.0.0",
+		"react-tabs": "^3.2.3",
+		"uuid": "^8.3.2",
+		"web-vitals": "^1.1.2"
+	},
+	"scripts": {
+		"start": "craco start",
+		"build": "craco build",
+		"test": "craco test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@open-wc/webpack-import-meta-loader": "^0.4.7",
+		"autoprefixer": "^9.8.8",
+		"postcss": "^7.0.39",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+	}
 }
