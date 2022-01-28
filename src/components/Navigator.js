@@ -1,5 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
-import update from 'immutability-helper';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Header from './Header';
@@ -8,14 +7,15 @@ import { faExternalLinkAlt, faFileImport, faTimes, faTrash } from '@fortawesome/
 import { v4 as uuidv4 } from 'uuid';
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import { arrayMoveImmutable } from 'array-move';
-import Iconbutton from './IconButton';
 import IconButton from './IconButton';
 import listAllFilesAndDirs from '../helpers/listAllFilesAndDirs';
 import RecursiveList from './RecursiveList';
+import toast from 'react-simple-toasts';
+
 
 export const Navigator = () => {
     const [state, dispatch] = useContext(GlobalContext);
-    const { projectFiles, previewFiles } = state;
+    const { projectFiles, previewFiles, projectDir } = state;
 
     const addToNavigator = async (item) => {
         const fileData = await item.handle.getFile();
@@ -47,10 +47,20 @@ export const Navigator = () => {
 
 
     // Directory open 
-    const openDir = async () => {
+    const openDir = async (prevDirHandle = false) => {
         // Get Directory Handles
-        const dirHandle = await window.showDirectoryPicker();
-        console.log('dir', dirHandle);
+        
+        let dirHandle;
+        console.log('prevDirHandle :>> ', prevDirHandle);
+
+        if (prevDirHandle) {
+          dirHandle = prevDirHandle;
+        }
+        else {
+          dirHandle = await window.showDirectoryPicker();
+
+        }
+        // console.log('dir', dirHandle);
         dispatch({
             type: 'SET_PROJECT_NAME',
             payload: dirHandle.name,
@@ -82,6 +92,58 @@ export const Navigator = () => {
             payload: files,
         })
     }
+
+    // sync function
+    const syncFiles = async () => {
+
+      // console.log(variant);
+      // const file = await handle.getFile();
+      // const text = await file.text();
+      // const { content } = JSON.parse(text);
+      console.log('THIS HAPPENDED!')
+
+      const components = projectFiles.find(x => x.name == 'components').files;
+      // console.log('THIS HAPPENDED!')
+      console.log('components :>> ', components);
+
+      // console.log(previe)
+      const content = previewFiles.map(x => x.name);
+
+      console.log('content :>> ', content);
+
+
+      let previewData = [];
+      for (const i of content) {
+          // get handles
+          const component = components.find(x => x.name == i);
+
+          if (component) {
+              const file = await component.handle.getFile();
+              const text = await file.text();
+              const id = await uuidv4();
+
+              previewData.push({
+                  id,
+                  name: component.name,
+                  content: text
+              });
+          }
+      }
+
+      const load = () => {
+          dispatch({
+              type: 'SET_PREVIEW_FILES',
+              payload: previewData
+          });
+          dispatch({
+              type: 'SET_UNSAVED',
+              payload: false
+          });
+      }
+
+      load();
+      toast('Project Files synced!');
+  }
 
     // Conditionals
     const isProjectOpened = projectFiles.length > 0;
@@ -127,6 +189,30 @@ export const Navigator = () => {
         });
     };
 
+    const sync = () => {
+      openDir(projectDir);
+      syncFiles();
+    }
+
+   const keydownHandler =(e) => {
+      // if (!isProjectOpened) return;
+      if (e.keyCode === 82) {
+        e.preventDefault();
+        // (() => sync())();
+        console.log(syncRef)
+        syncRef.current.focus();
+        syncRef.current.click();
+
+      };
+      // alert('refreshed!')
+    }
+
+    useEffect(() => {
+      document.addEventListener("keydown", keydownHandler);
+      return () => document.removeEventListener("keydown", keydownHandler);
+    }, []);
+
+    const syncRef = useRef();
     return (
         <>
             <section className="w-2/8 p-3 py-4 flex-1 select-none">
@@ -142,7 +228,11 @@ export const Navigator = () => {
                 <div className="">
                     <Header>
                         Project Files
-                        <IconButton icon="sync" title="Sync files" />
+                        {
+                          isProjectOpened && 
+                        <IconButton icon="sync" title="Sync files" onClick={sync} ref={syncRef}/>
+
+                        }
 
                     </Header>
                     {
@@ -157,7 +247,7 @@ export const Navigator = () => {
                                 ]
                             }} />
                         </ul>) : (<>
-                            <Button onClick={openDir} title="Open Project" icon="folder-open" />
+                            <Button onClick={() => openDir()} title="Open Project" icon="folder-open" />
                             <p className="text-gray-500 text-sm mb-3 pt-3">Open an email template project that uses the
                                 &nbsp;<a target="_blank" className="underline" href="https://github.com/andreitrinidad/marketo-boilerplate">Marketo Boilerplate&nbsp;<FontAwesomeIcon icon={faExternalLinkAlt} /></a>
                             </p>

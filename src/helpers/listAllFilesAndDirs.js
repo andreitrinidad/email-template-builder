@@ -18,7 +18,7 @@ const listAllFilesAndDirs = async (dirHandle, whiteListFiles = [], whiteListDire
     }
 
     // if (showFilesOnly) return filesOnly;
-    console.log(`filesOnly`, filesOnly)
+    // console.log(`filesOnly`, filesOnly)
     return files;
 }
 
